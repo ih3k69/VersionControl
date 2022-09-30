@@ -33,6 +33,7 @@
             this.lblLastName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnfajl = new System.Windows.Forms.Button();
+            this.btndelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUsers
@@ -70,18 +71,28 @@
             // 
             // btnfajl
             // 
-            this.btnfajl.Location = new System.Drawing.Point(243, 181);
+            this.btnfajl.Location = new System.Drawing.Point(243, 221);
             this.btnfajl.Name = "btnfajl";
             this.btnfajl.Size = new System.Drawing.Size(188, 23);
             this.btnfajl.TabIndex = 7;
             this.btnfajl.Text = "button2";
             this.btnfajl.UseVisualStyleBackColor = true;
             // 
+            // btndelete
+            // 
+            this.btndelete.Location = new System.Drawing.Point(243, 171);
+            this.btndelete.Name = "btndelete";
+            this.btndelete.Size = new System.Drawing.Size(188, 23);
+            this.btndelete.TabIndex = 8;
+            this.btndelete.Text = "button3";
+            this.btndelete.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 450);
+            this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnfajl);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblLastName);
@@ -101,6 +112,7 @@
         private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnfajl;
+        private System.Windows.Forms.Button btndelete;
     }
 }
 

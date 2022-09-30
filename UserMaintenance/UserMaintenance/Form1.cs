@@ -31,7 +31,22 @@ namespace UserMaintenance
             listUsers.DisplayMember = "FullName";
             btnAdd.Click += BtnAdd_Click;
             btnfajl.Click += Btnfajl_Click;
+            btndelete.Text = Resource1.Delete;
+            btndelete.Click += Btndelete_Click;
 
+
+        }
+
+        private void Btndelete_Click(object sender, EventArgs e)
+        {
+            User kivalasztott=(User)listUsers.SelectedItem;
+            
+            var toroltuser = from x in users
+                     where x.FullName== kivalasztott.FullName
+                     select x;
+           
+            users.Remove(toroltuser.FirstOrDefault());
+            listUsers.DataSource = users;
 
         }
 
