@@ -32,7 +32,7 @@
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.lblLastName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.btnfajl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUsers
@@ -68,19 +68,21 @@
             this.btnAdd.Text = "button1";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // btnfajl
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 26);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(157, 20);
-            this.textBox3.TabIndex = 6;
+            this.btnfajl.Location = new System.Drawing.Point(243, 181);
+            this.btnfajl.Name = "btnfajl";
+            this.btnfajl.Size = new System.Drawing.Size(188, 23);
+            this.btnfajl.TabIndex = 7;
+            this.btnfajl.Text = "button2";
+            this.btnfajl.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 450);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.btnfajl);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.txtLastName);
@@ -98,7 +100,7 @@
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnfajl;
     }
 }
 
