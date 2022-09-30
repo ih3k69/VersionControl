@@ -31,10 +31,8 @@
             this.listUsers = new System.Windows.Forms.ListBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.lblLastName = new System.Windows.Forms.Label();
-            this.lblFistName = new System.Windows.Forms.Label();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.btnfajl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUsers
@@ -55,27 +53,11 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(196, 33);
+            this.lblLastName.Location = new System.Drawing.Point(201, 33);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(35, 13);
             this.lblLastName.TabIndex = 2;
             this.lblLastName.Text = "label1";
-            // 
-            // lblFistName
-            // 
-            this.lblFistName.AutoSize = true;
-            this.lblFistName.Location = new System.Drawing.Point(196, 83);
-            this.lblFistName.Name = "lblFistName";
-            this.lblFistName.Size = new System.Drawing.Size(35, 13);
-            this.lblFistName.TabIndex = 3;
-            this.lblFistName.Text = "label2";
-            // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Location = new System.Drawing.Point(281, 76);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(150, 20);
-            this.txtFirstName.TabIndex = 4;
             // 
             // btnAdd
             // 
@@ -86,22 +68,22 @@
             this.btnAdd.Text = "button1";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // btnfajl
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 26);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(157, 20);
-            this.textBox3.TabIndex = 6;
+            this.btnfajl.Location = new System.Drawing.Point(243, 181);
+            this.btnfajl.Name = "btnfajl";
+            this.btnfajl.Size = new System.Drawing.Size(188, 23);
+            this.btnfajl.TabIndex = 7;
+            this.btnfajl.Text = "button2";
+            this.btnfajl.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 450);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.btnfajl);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtFirstName);
-            this.Controls.Add(this.lblFistName);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.listUsers);
@@ -117,10 +99,8 @@
         private System.Windows.Forms.ListBox listUsers;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.Label lblFistName;
-        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnfajl;
     }
 }
 
