@@ -55,7 +55,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(240, 33);
+            this.lblLastName.Location = new System.Drawing.Point(196, 33);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(35, 13);
             this.lblLastName.TabIndex = 2;
@@ -64,7 +64,7 @@
             // lblFistName
             // 
             this.lblFistName.AutoSize = true;
-            this.lblFistName.Location = new System.Drawing.Point(240, 79);
+            this.lblFistName.Location = new System.Drawing.Point(196, 83);
             this.lblFistName.Name = "lblFistName";
             this.lblFistName.Size = new System.Drawing.Size(35, 13);
             this.lblFistName.TabIndex = 3;
