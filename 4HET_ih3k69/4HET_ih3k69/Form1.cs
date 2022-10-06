@@ -28,15 +28,15 @@ namespace _4HET_ih3k69
             InitializeComponent();
             LoadData();
             CreateExcel();
-           
 
-           
+
+
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
         void LoadData()
         {
@@ -56,7 +56,7 @@ namespace _4HET_ih3k69
                 xlSheet = xlWB.ActiveSheet;
 
                 // Tábla létrehozása
-                 CreateTable(); // Ennek megírása a következő feladatrészben következik
+                CreateTable(); // Ennek megírása a következő feladatrészben következik
 
                 // Control átadása a felhasználónak
                 xlApp.Visible = true;
@@ -89,21 +89,21 @@ namespace _4HET_ih3k69
                 "Ár (mFt)",
                 "Négyzetméter ár (Ft/m2)"
             };
-          
-               
+
+
             for (int i = 1; i < headers.Length + 1; i++)
             {
-               xlSheet.Cells[1, i] = headers[i - 1];
+                xlSheet.Cells[1, i] = headers[i - 1];
             }
             object[,] values = new object[flats.Count, headers.Length];
             int counter = 0;
-            foreach(var item in flats)
+            foreach (var item in flats)
             {
                 values[counter, 0] = item.Code;
                 values[counter, 1] = item.Vendor;
                 values[counter, 2] = item.Side;
                 values[counter, 3] = item.District;
-                if (item.Elevator==true)
+                if (item.Elevator == true)
                 {
                     values[counter, 4] = "Van";
                 }
@@ -111,21 +111,36 @@ namespace _4HET_ih3k69
                 {
                     values[counter, 4] = "Nincs";
                 }
-               
+
 
                 values[counter, 5] = item.NumberOfRooms;
                 values[counter, 6] = item.FloorArea;
                 values[counter, 7] = item.Price;
-                
+
                 values[counter, 8] = "";
-                
-               counter++;
+
+                counter++;
             }
             xlSheet.get_Range(
               GetCell(2, 1),
               GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
-          
-              
+            xlSheet.get_Range(GetCell(2, 9), GetCell(2 + flats.Count, 9)).Formula = $"={GetCell(2, 8)}/{GetCell(2, 7)}*1000000";
+
+            //Formázás
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+            Excel.Range forange = xlSheet.get_Range(GetCell(2, 1), GetCell(flats.Count + 2, headers.Length));
+            forange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+            xlSheet.get_Range(GetCell(2, 1), GetCell(flats.Count + 2, 1)).Font.Bold = true;
+            xlSheet.get_Range(GetCell(2, 1), GetCell(flats.Count + 2, 1)).Interior.Color = Color.LightYellow;
+            xlSheet.get_Range(GetCell(2, headers.Length), GetCell(flats.Count + 2, headers.Length)).NumberFormat = "$0.00";
+            xlSheet.get_Range(GetCell(2, headers.Length), GetCell(flats.Count + 2, headers.Length)).Interior.Color = Color.LightGreen;
 
 
 
