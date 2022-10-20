@@ -1,4 +1,5 @@
-﻿using _6HET_ih3k69_5fel.MnbServiceReference;
+﻿using _6HET_ih3k69_5fel.Entities;
+using _6HET_ih3k69_5fel.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,11 @@ namespace _6HET_ih3k69_5fel
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
         public Form1()
         {
             InitializeComponent();
+            dataGridView1.DataSource = Rates;
            
         }
         void webszol()
