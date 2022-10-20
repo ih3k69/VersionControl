@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace _6HET_ih3k69_5fel
 {
@@ -19,9 +20,11 @@ namespace _6HET_ih3k69_5fel
         {
             InitializeComponent();
             dataGridView1.DataSource = Rates;
+            
+            xmlfeladat();
            
         }
-        void webszol()
+        string webszol()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
@@ -33,6 +36,30 @@ namespace _6HET_ih3k69_5fel
             };
             var response = mnbService.GetExchangeRates(request);
             var result = response.GetExchangeRatesResult;
+            return result;
         }
+        void xmlfeladat()
+        {
+            var xml = new XmlDocument();
+            xml.LoadXml(webszol());
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var rd = new RateData();
+                Rates.Add(rd);
+                
+                    rd.Date = Convert.ToDateTime(element.GetAttribute("date"));
+                    var childElement = (XmlElement)element.ChildNodes[0];
+                    rd.Currency = childElement.GetAttribute("curr");
+                    var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                    var value = decimal.Parse(childElement.InnerText);
+                    if (unit != 0)
+                    rd.Value = value / unit;
+
+
+
+
+            }
+        }
+
     }
 }
