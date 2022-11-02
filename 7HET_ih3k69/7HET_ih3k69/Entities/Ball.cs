@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace _7HET_ih3k69.Entities
 {
-    internal class Ball : Label
+    public class Ball : Label
     {
         public Ball()
         {
