@@ -15,6 +15,7 @@ namespace _7HET_ih3k69
 {
     public partial class Form1 : Form
     {
+        private Toy _nextToy;
         List<Toy> _toys = new List<Toy>();
         private IToyFactory _factory;
         public IToyFactory Factory
@@ -57,6 +58,34 @@ namespace _7HET_ih3k69
             _toys.Add(toy);
             toy.Left = -toy.Width;
             mainPanel.Controls.Add(toy);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+        void DisplayNext()
+        {
+            if (_nextToy != null) Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Left = label1.Left;
+            Controls.Add(_nextToy);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender; ;
+            var colorpicker = new ColorDialog();
+            colorpicker.Color = BackColor;
+            if (colorpicker.ShowDialog() != DialogResult.OK) return;
+            button.BackColor = colorpicker.Color;
+
         }
     }
 }
