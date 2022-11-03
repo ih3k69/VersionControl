@@ -38,7 +38,7 @@ namespace _7HET_ih3k69
             int jobb=0;
             foreach (var item in _balls)
             {
-                item.MoveBall();
+                item.MoveToy();
                 if (jobb<item.Left)
                 {
                     jobb = item.Left;
