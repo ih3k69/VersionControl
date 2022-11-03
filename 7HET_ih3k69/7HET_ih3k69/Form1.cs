@@ -75,6 +75,7 @@ namespace _7HET_ih3k69
             };
             
         }
+
         void DisplayNext()
         {
             if (_nextToy != null) Controls.Remove(_nextToy);
@@ -92,6 +93,15 @@ namespace _7HET_ih3k69
             if (colorpicker.ShowDialog() != DialogResult.OK) return;
             button.BackColor = colorpicker.Color;
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                Ribbon = button5.BackColor,
+                Box=button6.BackColor
+            };
         }
     }
 }
