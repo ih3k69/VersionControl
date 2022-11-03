@@ -21,7 +21,9 @@ namespace _7HET_ih3k69
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set { _factory = value;
+                DisplayNext();
+            }
         }
 
         public Form1()
@@ -67,7 +69,11 @@ namespace _7HET_ih3k69
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory
+            {
+                BallColor = button3.BackColor
+            };
+            
         }
         void DisplayNext()
         {

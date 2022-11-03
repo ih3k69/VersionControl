@@ -12,9 +12,14 @@ namespace _7HET_ih3k69.Entities
 {
     public class Ball : Toy
     {
+        public SolidBrush BallColor { get; private set; }
+        public Ball(Color color)
+        {
+            BallColor = new SolidBrush(color);    
+        }
         protected override void DrawImage(Graphics graf)
         {
-            graf.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height);
+            graf.FillEllipse(BallColor, 0, 0, Width, Height);
         }
        
     }
