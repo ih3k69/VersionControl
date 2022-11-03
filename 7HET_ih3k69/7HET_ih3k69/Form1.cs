@@ -1,4 +1,5 @@
 ﻿using _7HET_ih3k69.Entities;
+using _7HET_ih3k69.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,20 +15,18 @@ namespace _7HET_ih3k69
 {
     public partial class Form1 : Form
     {
-        List<Ball> _balls = new List<Ball>();
-        private BallFactory _factory;
-        public BallFactory Factory
+        List<Toy> _toys = new List<Toy>();
+        private IToyFactory _factory;
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
         }
 
-
-
         public Form1()
         {
             InitializeComponent();
-            Factory=new BallFactory();
+            Factory=new CarFactory();
             createTimer.Tick += CreateTimer_Tick;
             conveyorTimer.Tick += ConveyorTimer_Tick;
 
@@ -36,7 +35,7 @@ namespace _7HET_ih3k69
         private void ConveyorTimer_Tick(object sender, EventArgs e)
         {
             int jobb=0;
-            foreach (var item in _balls)
+            foreach (var item in _toys)
             {
                 item.MoveToy();
                 if (jobb<item.Left)
@@ -46,18 +45,18 @@ namespace _7HET_ih3k69
             }
             if (jobb>1000)
             {
-                var régibb = _balls[0];
+                var régibb = _toys[0];
                 mainPanel.Controls.Remove(régibb);
-                _balls.Remove(régibb);
+                _toys.Remove(régibb);
             }
         }
 
         private void CreateTimer_Tick(object sender, EventArgs e)
         {
-           var ball= Factory.CreateNew();
-            _balls.Add(ball);
-            ball.Left = -ball.Width;
-            mainPanel.Controls.Add(ball);
+           var toy= Factory.CreateNew();
+            _toys.Add(toy);
+            toy.Left = -toy.Width;
+            mainPanel.Controls.Add(toy);
         }
     }
 }
