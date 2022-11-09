@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -19,13 +20,14 @@ namespace _8HET_ih3k69
         List<Tick> Ticks;
         PortfolioEntities context=new PortfolioEntities();
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek = new List<decimal>();
         public Form1()
         {
             InitializeComponent();
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
             CreatePortfolio();
-            List<decimal> Nyereségek = new List<decimal>();
+            
             int intervalum = 30;
             DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -62,6 +64,26 @@ namespace _8HET_ih3k69
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.Filter = "Text File |*.txt";
+            sfd.DefaultExt = "txt";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+            using (StreamWriter sw = new StreamWriter(sfd.FileName, false))
+            { sw.WriteLine("Időszak Nyereség");
+            
+                int sorszam = 1;
+                foreach (var item in Nyereségek)
+                {
+                    sw.WriteLine($"{sorszam} {item}");
+                    sorszam++;
+                }
+            }
         }
     }
 }
