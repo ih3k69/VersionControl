@@ -112,7 +112,7 @@ namespace _6HET_ih3k69_5fel
             chartRatesData.DataSource = Rates;
             var series = chartRatesData.Series[0];
             series.ChartType=SeriesChartType.Line;
-            //series.XValueMember = "Data";
+            series.XValueMember = "Date";
             series.YValueMembers = "Value";
             series.BorderWidth = 2;
 
