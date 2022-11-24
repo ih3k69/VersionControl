@@ -8,6 +8,9 @@ using System.Xml.Schema;
 using UnitTestExample.Controllers;
 using System.Activities;
 using NuGet.ContentModel;
+using Moq;
+using UnitTestExample.Abstractions;
+using UnitTestExample.Entities;
 
 namespace UnitTestExample.Test2
 {
@@ -53,11 +56,17 @@ namespace UnitTestExample.Test2
         ]
         public void TestRegisterHappyPath(string email, string password)
         {
+            var accountServiceMock = new Mock<IAccountManager>(MockBehavior.Strict);
+            accountServiceMock.Setup(m => m.CreateAccount(It.IsAny<Account>()))
+                .Returns<Account>(a=>a);
+            
             var accountController = new AccountController();
+            accountController.AccountManager=accountServiceMock.Object;
             var actualResult = accountController.Register(email, password);
             Assert.AreEqual(email, actualResult.Email);
             Assert.AreEqual(password, actualResult.Password);
             Assert.AreNotEqual(Guid.Empty, actualResult.ID);
+            accountServiceMock.Verify(m=>m.CreateAccount(actualResult),Times.Once);
         }
 
         [Test,
@@ -83,6 +92,33 @@ namespace UnitTestExample.Test2
                Assert.IsInstanceOf<ValidationException>(ex);
                //Assert.IsInstanceOf<NUnit.Framework.AssertionException>(ex);
             }
+        }
+        [
+             Test,
+             TestCase("irf@uni-corvinus.hu", "Abcd1234")
+]
+        public void TestRegisterApplicationException(string newEmail, string newPassword)
+        {
+            // Arrange
+            var accountServiceMock = new Mock<IAccountManager>(MockBehavior.Strict);
+            accountServiceMock
+                .Setup(m => m.CreateAccount(It.IsAny<Account>()))
+                .Throws<ApplicationException>();
+            var accountController = new AccountController();
+            accountController.AccountManager = accountServiceMock.Object;
+
+            // Act
+            try
+            {
+                var actualResult = accountController.Register(newEmail, newPassword);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOf<ApplicationException>(ex);
+            }
+
+            // Assert
         }
     }
 }
