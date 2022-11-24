@@ -29,7 +29,7 @@ namespace UnitTestExample.Test2
         }
 
         [   Test,
-            TestCase("abcdABCD",false),
+            TestCase("abcdABCD", false),
             TestCase("ABCD1234", false),
             TestCase("abcd1234",false),
             TestCase("Ab1234",false),
