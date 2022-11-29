@@ -18,6 +18,7 @@ namespace _11HET_ih3k69
         List<Person> Population = new List<Person>();
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+        Random rnd=new Random(1234);
 
         public Form1()
         {
@@ -25,6 +26,25 @@ namespace _11HET_ih3k69
             Population=GetPopulation(@"D:\nép.csv");
             BirthProbabilities = GetBirth(@"D:\születés.csv");
             DeathProbabilities = GetDeath(@"D:\halál.csv");
+            for (int i = 2005; i <=2024; i++)
+            {
+                for (int j = 0; j < Population.Count; j++)
+                {
+                    //importante
+                    Simstep(i, Population[j]);
+                   
+                }
+                int nbrOfMales = (from x in Population
+                                  where x.Gender == Gender.Male && x.IsAlive
+                                  select x).Count();
+                int nbrOfFemales = (from x in Population
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
+                Console.WriteLine(
+                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", i, nbrOfMales, nbrOfFemales));
+
+            }
+
         }
         public List<Person> GetPopulation (string csvpath)
         {
@@ -79,6 +99,31 @@ namespace _11HET_ih3k69
                 }
             }
             return halálok;
+        }
+        public void Simstep(int year, Person person)
+        {
+            if (person.IsAlive == false) return;
+            byte kor = (byte)(year - person.BirthYear);
+            double halálózásiesély = (from x in DeathProbabilities
+                                   where x.Year == kor && x.Gender == person.Gender
+                                   select x.Dprobability).FirstOrDefault();
+            var random = rnd.NextDouble();
+            if (random<=halálózásiesély)
+            {
+                person.IsAlive = false;
+            }
+            if (person.Gender==Gender.Female&&person.IsAlive)
+            {
+                var vanegyerek = (from x in BirthProbabilities
+                                  where x.Year == kor 
+                                  select x.Bprobability).FirstOrDefault();
+                var randomgyerek = rnd.NextDouble();
+                if (randomgyerek<=vanegyerek)
+                {
+                    Population.Add(new Person { BirthYear = year, Gender = (Gender)(rnd.Next(1,3)), NbrOfChildren = 0 });
+                }
+            }
+           
         }
     }
 }
