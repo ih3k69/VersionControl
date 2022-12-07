@@ -19,6 +19,7 @@ namespace _12HET_ih3k69
         int nbrOfSteps = 10;
         int nbrOfStepsIncrement = 10;
         int generation = 1;
+        Brain b=null;
         
         public Form1()
         {
@@ -30,6 +31,52 @@ namespace _12HET_ih3k69
             for (int i = 0; i < populationSize; i++)
             {
                 gc.AddPlayer(nbrOfSteps);
+            }
+            gc.GameOver += Gc_GameOver;
+            gc.Start();
+        }
+
+        private void Gc_GameOver(object sender)
+        {
+            label1.BringToFront();
+            generation++;
+            label1.Text = $"{generation}. generáció";
+            var playerList = from p in gc.GetCurrentPlayers()
+                             orderby p.GetFitness() descending
+                             select p;
+            var topPerformers = playerList.Take(populationSize / 2).ToList();
+            /*foreach (var item in topPerformers)
+            {
+                if (item.IsWinner==true)
+                {
+                    b = item.Brain;
+                    gc.GameOver-=Gc_GameOver;   
+                    return;
+
+                }
+            }*/
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+            if (winners.Count() > 0)
+            {
+                b= winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
+            gc.ResetCurrentLevel();
+            foreach (var p in topPerformers)
+            {
+                var b = p.Brain.Clone();
+                if (generation % 3 == 0)
+                    gc.AddPlayer(b.ExpandBrain(nbrOfStepsIncrement));
+                else
+                    gc.AddPlayer(b);
+
+                if (generation % 3 == 0)
+                    gc.AddPlayer(b.Mutate().ExpandBrain(nbrOfStepsIncrement));
+                else
+                    gc.AddPlayer(b.Mutate());
             }
             gc.Start();
         }
